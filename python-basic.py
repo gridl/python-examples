@@ -1,3 +1,8 @@
+# Python script of the basic operations
+# Author: Sandeep Mewara
+# Location: Learn By Insight
+# Github: https://github.com/samewara/python-examples/blob/master/python-basic.py
+# #####################################
 # To add a new cell, type '# %%'
 # To add a new markdown cell, type '# %% [markdown]'
 # %% [markdown]
