@@ -432,4 +432,17 @@ def sum_num(x,*y): # can accept a variable number of arguments if we add * to th
 print (sum_num(10,20))
 print (sum_num(11,22,33,44,55))
 
+# %% [markdown]
+# *** List Comprehension ***
 
+# %%
+lst = [i for i in range(5)]
+lst
+
+
+# %%
+# matrix of 4*3
+row_num = 4
+col_num = 3
+multi_list = [[0 for col in range(col_num)] for row in range(row_num)]
+multi_list
