@@ -446,3 +446,33 @@ row_num = 4
 col_num = 3
 multi_list = [[0 for col in range(col_num)] for row in range(row_num)]
 multi_list
+
+# %% [markdown]
+# *** Zip & Pack ***
+
+# %%
+# Merge/Pack two lists into list of tuples
+#1: Using zip
+lst1 = (1,3,5,7)
+lst2 = (2,4,6,8)
+#zip
+lst = list(zip(lst1,lst2))
+print ('tuples using zip', lst)
+for i,j in lst:
+    print (i,j)
+
+
+# %%
+#2: Using map
+print ('tuples using map', list(map(lambda x, y:(x,y), lst1, lst2)))
+
+
+# %%
+# Unpack tuples into list back
+
+unpack_lst1, unpack_lst2 = list(zip(*lst))
+print ('lst1_back: ',unpack_lst1)
+print ('lst2_back: ',unpack_lst2)
+
+
+# %%
