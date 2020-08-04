@@ -5,9 +5,6 @@
 # #####################################
 # To add a new cell, type '# %%'
 # To add a new markdown cell, type '# %% [markdown]'
-# %%
-from IPython import get_ipython
-
 # %% [markdown]
 # ## Numpy (Numerical python)
 # 
@@ -151,7 +148,7 @@ for i in range(len(trials_multiple)):
 # sample data on a quarterly basis on Indian economy sampled from RBI database containing Gross Value added, Forex, Borrowings for the period 2016 - Q1 2018. Find the correlation among different indicators
 
 # %%
-f=open('./data-files/numpy-basic/economy_data.csv')
+f=open('./data-files/numpy/economy_data.csv')
 data = f.read().split('\n')
 data
 
@@ -165,7 +162,7 @@ for content in data[:-1]:
 # %%
 #read data into numpy array
 #skip the header and 1st column
-data_np = np.genfromtxt('./data-files/numpy-basic/economy_data.csv',delimiter=",",skip_header=1,usecols=[1,2,3,4],dtype="float32")
+data_np = np.genfromtxt('./data-files/numpy/economy_data.csv',delimiter=",",skip_header=1,usecols=[1,2,3,4],dtype="float32")
 print("Data shape:",data_np.shape, ", Data size:",data_np.size, ", Data type:",data_np.dtype)
 print(data_np)
 
@@ -242,7 +239,7 @@ import matplotlib.image as mimg
 import matplotlib.pyplot as plt
 import numpy as np
 get_ipython().run_line_magic('matplotlib', 'inline')
-img = mimg.imread('./data-files/numpy-basic/hulk.png') # read an image
+img = mimg.imread('./data-files/numpy/hulk.png') # read an image
 
 original_image_pixels = np.array(img,dtype='float32')  # make an numpy array
 print (original_image_pixels) # Note the values are between 0 and 1

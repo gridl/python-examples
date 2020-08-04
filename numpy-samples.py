@@ -146,7 +146,7 @@ print('PCC via Numpy: ',np.corrcoef(X,Y))
 # 2. Missing/Unknown data (should not be part of calcs)
 
 # %%
-data = np.genfromtxt('./data-files/numpy-samples/crude_oil.csv',delimiter=";")
+data = np.genfromtxt('./data-files/numpy/crude_oil.csv',delimiter=";")
 # data
 # Row1 & Column1 look like not a number here so
 data=data[1:,1:]
@@ -154,7 +154,7 @@ data
 
 
 # %%
-data = np.genfromtxt('./data-files/numpy-samples/crude_oil.csv',delimiter=";",skip_header=1, encoding=None)
+data = np.genfromtxt('./data-files/numpy/crude_oil.csv',delimiter=";",skip_header=1, encoding=None)
 data=data[:,1:]
 data
 
@@ -172,5 +172,3 @@ crude2_data = crude_data[~np.isnan(data[:,1])][:,1] #all rows but not nan, 1st c
 # %%
 print('crude1_mean:{0},crude2_mean:{1}'.format(np.mean(crude1_data),np.mean(crude2_data)))
 print('crude1_sd:{0},crude2_sd:{1}'.format(np.std(crude1_data),np.std(crude2_data)))
-
-
