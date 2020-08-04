@@ -31,7 +31,7 @@ print("SumOfSquare(5):", sumsquares(5))
 
 # %%
 # data-file: studentmarks1.csv
-student_marks1 = open('./data-files/python-examples/studentmarks1.csv','r')
+student_marks1 = open('./data-files/python-samples/studentmarks1.csv','r')
 marks_list = student_marks1.read().splitlines()
 marks_list
 
@@ -49,7 +49,7 @@ sorted(marks_dict.items(), key=lambda x:x[1], reverse=True) #use sorted on marks
 
 # %%
 # data-file: studentmarks2.csv
-student_marks1 = open('./data-files/python-examples/studentmarks2.csv','r')
+student_marks1 = open('./data-files/python-samples/studentmarks2.csv','r')
 marks_list = student_marks1.read().splitlines()
 marks_list
 
@@ -67,7 +67,7 @@ sorted(marks_dict.items(), key=lambda x:(x[1][0],x[1][1]), reverse=True) #x[1] =
 
 # %%
 # data-file: studentmarks2.csv
-student_marks1 = open('./data-files/python-examples/studentmarks2.csv','r')
+student_marks1 = open('./data-files/python-samples/studentmarks2.csv','r')
 marks_list = student_marks1.read().splitlines()
 marks_list
 
@@ -84,13 +84,13 @@ for ml in marks_list:
 # The file <code>novel_conard.txt</code> contains the text of a book by Joseph Conard. We wish construct a dictionary that stores the number of times each word appears. Common words like <code>an, the, is, by</code>  are called stop words are not of much interest. So we want to construct a word frequency dictionary after removing the stop words from the novel. The list of stop_words is given in the file <code>stopwords.txt</code>.
 
 # %%
-novel_file = open('./data-files/python-examples/novel_conard.txt','r')
+novel_file = open('./data-files/python-samples/novel_conard.txt','r')
 novel_text = novel_file.read().splitlines()
 novel_text[0:10]
 
 
 # %%
-stop_file = open('./data-files/python-examples/stopwords.txt','r')
+stop_file = open('./data-files/python-samples/stopwords.txt','r')
 stop_word_list = stop_file.read().splitlines()
 stop_word_list[0:10]
 
