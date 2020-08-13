@@ -186,7 +186,7 @@ df2["Country"]
 # %%
 # The option sep="," is used to indicate field separators
 # The file name can be replaced with a URL
-df3 = pd.read_csv('./data-files/panda/population.csv',sep=",") 
+df3 = pd.read_csv('./data-files/pandas/population.csv',sep=",") 
 df3.head()
 
 
@@ -278,7 +278,7 @@ df_iris.describe() # summary of numerical columns
 # *** Modifying data in dataframe ***
 
 # %%
-df_marks = pd.read_csv('./data-files/panda/studentmarks2.csv', sep=",", header=None)
+df_marks = pd.read_csv('./data-files/pandas/studentmarks2.csv', sep=",", header=None)
 df_marks
 
 
