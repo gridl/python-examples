@@ -1,7 +1,7 @@
 # Python script of panda basics
 # Author: Sandeep Mewara
 # Location: Learn By Insight
-# Github: https://github.com/samewara/python-examples/blob/master/numpy-basic.py
+# Github: https://github.com/samewara/python-examples/blob/master/pandas-basic.py
 # #####################################
 # To add a new cell, type '# %%'
 # To add a new markdown cell, type '# %% [markdown]'
@@ -347,5 +347,178 @@ df_marks.drop("Total", axis=1)  # not done inplace
 
 # %%
 df_marks
+
+# %% [markdown]
+# *** Groupby Operation ***
+
+# %%
+df_marks['Grade'] = ['First','Fourth','Fourth','Third',"Third","Third","Second","Second","Second","Third","Second","Second" ]
+df_marks
+
+
+# %%
+df_marks['Grade'].value_counts() #groups by column value and provides count sorted
+
+
+# %%
+# Mean score of student by grade
+#df_gradeSecond = df_marks[['Marks1', 'Marks2']] # new data frame from two of the columns of existing dataframe
+df_grade = df_marks[['Marks1', 'Marks2']].groupby(df_marks['Grade'])
+df_grade
+
+
+# %%
+# We can apply aggregate operations like count, sum, max, min, mean, etc. on a group by object
+print(df_grade.mean())
+print(df_grade.count())
+
+# %% [markdown]
+# *** Custom Functions: Apply Method ***
+# 
+# apply allows to manipulate data using custom function.
+
+# %%
+# standard deviation of the marks. There is no built-in aggregate function for std. dev but we can use a fuction from numpy.
+
+df_grade.apply(np.std) 
+
+
+# %%
+# Example: apply on columns
+# Capitalize all the names of student 
+# using custom function 
+def DoCapital(c):
+    return c.capitalize()
+
+df_marks['Name'].apply(DoCapital)
+
+
+# %%
+# Example: apply on rows
+# using the option axis=1 or axis='columns'
+# average marks of students
+def FindAvg(row):
+    return (row['Marks1']+row['Marks2'])/2
+
+df_marks['Avergage'] = df_marks.apply(FindAvg,axis=1)
+df_marks
+
+# %% [markdown]
+# *** Pre-Processing ***
+# 
+# Few functions in Pandas that are handy in converting a raw table to the required format
+
+# %%
+# sample dataset of tshirts to play around
+# datafile: tshirts.csv
+df_tshirts = pd.read_csv('./data-files/pandas/tshirts.csv', sep=",")
+df_tshirts
+
+
+# %%
+# Quick observation: 
+# # 1. 19 rows
+# # 2. Column Brand has 1 NaN
+# # 3. Column Price has 2 NaN
+df_tshirts.info()
+
+# %% [markdown]
+# **** How to handle the missing value? ****
+
+# %%
+#1. DROP them
+# viable option if no of rows getting impacted is comparitively ignorable if removed
+# dropna()
+
+df_tshirts_drop = df_tshirts.copy()
+df_tshirts_drop.head(3)
+
+
+# %%
+# handy function dropna
+df_tshirts_drop.dropna( subset=['Brand','Price'] , inplace = True)
+df_tshirts_drop.info()
+
+
+# %%
+#2. Replace with mean
+# viable option for mostly handling missing numeric values 
+# if data is random and not particular visible relation in place
+# fillna()
+df_tshirts_fill = df_tshirts.copy()
+df_tshirts_fill['Price'].fillna(df_tshirts_fill['Price'].mean(), inplace=True)
+df_tshirts_fill
+
+
+# %%
+#3. Replace with most frequent item
+# viable option for mostly handling missing string values 
+# mode() - returns a list so we use 0 to pick the first value
+# fillna()
+
+
+# %%
+df_tshirts_fill2 = df_tshirts.copy()
+df_tshirts_fill2['Brand'].mode()
+
+
+# %%
+#pick any one and fill in to move
+df_tshirts_fill2['Brand'].fillna( df_tshirts_fill2['Brand'].mode()[1] , inplace=True)
+df_tshirts_fill2
+
+
+# %%
+#4. Replace with mean value of a group
+# viable option for mostly handling missing numeric values 
+# if data has particular visible relation in place
+# fillna()
+
+# price means by brand
+df_pmbb = df_tshirts_fill2.groupby('Brand')['Price'].mean()
+df_pmbb
+
+
+# %%
+def fill_missing(f):
+    f_mean = f.mean()
+    return f.fillna( f_mean )
+
+df_fillbygroup = df_tshirts_fill2.groupby(['Brand'])['Price'] # splits into three Series objects-one for each brand
+df_fillbygroup.transform( fill_missing ) #passes each of the three Series objects one by one to the function fill_missing & then combines back into one series
+
+
+# %%
+#5. Convert categories (strings) into numbers - easier to work across
+# Meaningful order (ORDINAL feature)
+# here size can be low to high. 
+
+size_number = {
+    'S':0,
+    'M':1,
+    'L':2,
+    'XL':3,
+    'XXL':4
+}
+
+df_of = df_tshirts.copy()
+df_of['Size'] = df_of['Size'].apply(lambda x: size_number[x]) # reassign as apply does not have inplace=True
+df_of 
+
+
+# %%
+#6. Convert categories (strings) into numbers - easier to work across
+# Random - cannot be ordered (NOMINAL feature)
+# here Colors are example of it
+# represent each unique color as a (dummy) feature of its own
+# Once transformed, for every data point, exactly one feature has the value 1 and the rest of them have zero. 
+# This representation is known as one-hot encoding
+
+df_nf = df_of.copy()
+df_nf_onehotencoded = pd.get_dummies(df_nf, columns=['Color'], drop_first=True) #drop_first will remove the string column
+df_nf_onehotencoded
+
+
+# %%
 
 
