@@ -519,6 +519,73 @@ df_nf_onehotencoded = pd.get_dummies(df_nf, columns=['Color'], drop_first=True) 
 df_nf_onehotencoded
 
 
+# %% [markdown]
+# *** Reshaping Dataframes ***
+
 # %%
+# 1. CROSSTAB - to see the item counts of various different combinations of categories
+# Example: https://archive.ics.uci.edu/ml/datasets/Car+Evaluation
+# a dataset of cars with categorical attributes. The categories describe how the price of the car, maintenance, space, etc
+
+df_cars = pd.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/car/car.data', header=None)
+df_cars.sample(3)
+
+
+# %%
+# lets define columns for clarity and to playaround
+df_cars.columns = ['Buying_Price', 'Maintenance', 'Doors', 'Persons', 'Boot_Space', 'Safety', 'Acceptability']
+df_cars.head(3)
+
+
+# %%
+# to see the number of cars of across different price ranges and acceptability. # like cross matrix giving details
+pd.crosstab( df_cars['Buying_Price'] , df_cars['Acceptability'], margins=True )
+
+
+# %%
+# 2. MERGE - Similar to join in SQL
+
+df_bikes = pd.read_csv('./data-files/pandas/bike_price.csv')
+df_bikes.sample(3)
+
+
+# %%
+df_type= pd.read_csv('./data-files/pandas/bike_type.csv')
+df_type.sample(3)
+
+
+# %%
+# clearly both the data can be mapped based on the typenumber, so lets do it
+pd.merge(df_bikes,df_type,on='TypeNumber',how='inner')
+
+
+# %%
+#3. MELT - reshapes the dataframe by converting column names into values.
+
+temp_week = {
+    'Channel': [ 'BT-TV' ,'CNN','BBC', 'Google'],
+    'Mon': [26,26,27,25],
+    'Tue': [25,26,27,25],
+    'Wed': [27,26,27,25],
+    'Thu': [29,28,28,28],
+    'Fri': [26,26,27,26],
+    'Sat': [26,24,27,25],
+    'Sun': [23,23,23,22]
+}
+df_melt = pd.DataFrame(data=temp_week)
+df_melt
+
+
+# %%
+temp_df = pd.melt(df_melt, id_vars=['Channel'], var_name='Day', value_name='Rating')
+temp_df.sample(5)
+
+
+# %%
+#4. PIVOT - reverse of MELT
+temp_df = temp_df.pivot(index='Channel', columns='Day', values='Rating')
+temp_df
+
+
 
 
