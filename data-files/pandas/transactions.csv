@@ -1,0 +1,12 @@
+From,To,Amount
+Sandeep,Chandan,20
+Jai,Sandeep,10
+Jai,Chandan,5
+Chandan,Kushagra,5
+Kushagra,Sandeep,25
+Chandru,Kushagra,30
+Sandeep,Chandru,15
+Chandru,Jai,15
+Chandan,Chandru,35
+Rajshekhar,Sandeep,25
+Rajshekhar,Sunil,5
